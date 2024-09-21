@@ -6,3 +6,4 @@
 # CV model
 CV/gestures/gestures_model
 CV/gestures/__pycache__
+CV/face_recog/__pycache__
