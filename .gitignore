@@ -4,11 +4,11 @@
 .venv
 
 # CV model
-CV/gestures/gestures_model
-CV/gestures/__pycache__
-CV/face_recog/__pycache__
-CV/face_recog/face_venv
+backend/CV/gestures/gestures_model
+backend/CV/gestures/__pycache__
+backend/CV/face_recog/__pycache__
+backend/CV/face_recog/face_venv
 
 
 **.pkl
-CV/face_recog/faces/ds_model_vggface_detector_opencv_aligned_normalization_base_expand_0.pkl
+backend/CV/face_recog/faces/ds_model_vggface_detector_opencv_aligned_normalization_base_expand_0.pkl
