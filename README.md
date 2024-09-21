@@ -46,8 +46,8 @@ We welcome contributions to Cypress3! Please see our CONTRIBUTING.md for details
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ##Acknowledgments
-- **dima806 for the Hand Gestures Image Detection model
-- **Sefik Ilkin Serengil for the DeepFace library
-- **OpenCV community for their excellent computer vision library
-- **FastAPI team for the high-performance web framework
-- **MongoDB team for their robust and scalable database solution
+- dima806 for the Hand Gestures Image Detection model
+- Sefik Ilkin Serengil for the DeepFace library
+- OpenCV community for their excellent computer vision library
+- FastAPI team for the high-performance web framework
+- MongoDB team for their robust and scalable database solution
