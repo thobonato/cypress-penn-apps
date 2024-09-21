@@ -6,6 +6,8 @@ import mediapipe as mp
 asl_detector = DetectGesture("./gestures_model", threshold=0.6)
 cap = cv2.VideoCapture(0)  # Use 0 for default camera
 
+print("Running...")
+
 if not cap.isOpened():
     print("Error: Could not open camera.")
 
