@@ -11,3 +11,4 @@ CV/face_recog/face_venv
 
 
 **.pkl
+CV/face_recog/faces/ds_model_vggface_detector_opencv_aligned_normalization_base_expand_0.pkl
