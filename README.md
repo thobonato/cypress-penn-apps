@@ -30,19 +30,19 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env with your MongoDB Atlas connection string and other configurations
 Run the Application
-bash
-Copy code
+```bash
 uvicorn app.main:app --reload
 Usage
 Register a new user by providing a username and uploading a facial image. During authentication:
-
+```
 The system will perform a liveness check.
 Facial recognition will verify the user's identity using DeepFace.
 The user will be prompted to perform a specific hand gesture within a given timeframe, recognized by the Hand Gestures Image Detection model.
-Contributing
+
+## Contributing
 We welcome contributions to Cypress3! Please see our CONTRIBUTING.md for details on how to get started.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Acknowledgments
