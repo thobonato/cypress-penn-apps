@@ -3,7 +3,7 @@ import time
 import cv2
 import mediapipe as mp
 
-asl_detector = DetectGesture("./gestures1", threshold=0.6)
+asl_detector = DetectGesture("./gestures_model", threshold=0.6)
 cap = cv2.VideoCapture(0)  # Use 0 for default camera
 
 if not cap.isOpened():
@@ -68,15 +68,15 @@ while True:
             if current_time - last_inference_time >= inference_interval:
                 # predicted_class, max_prob, inference_time = asl_detector.run_inference(hand_region)
                 probs, classes, time_elapsed = asl_detector.run_inference(hand_region)
-                print(f"Predicted ASL Sign: {classes}, MaxProb{probs} Inference Time: {time_elapsed:.4f}s")
+                print(f"Predicted Gesture: {classes}, Probability: {probs}, Inference Time: {time_elapsed:.4f}s")
                 current_prediction = f"Predicted: {classes}"
                 last_inference_time = current_time
 
     else:
-        current_prediction="No prediction/No hand"
+        current_prediction="No hand"
     
     cv2.putText(frame, current_prediction, (30, 80), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 2)
-    cv2.imshow('ASL Detection', frame)
+    cv2.imshow('Gesture Detection', frame)
 
     # Press 'q' to exit the loop
     if cv2.waitKey(1) & 0xFF == ord('q'):

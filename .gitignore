@@ -4,5 +4,5 @@
 .venv
 
 # CV model
-CV/gestures1
-CV/__pycache__
+CV/gestures/gestures_model
+CV/gestures/__pycache__
