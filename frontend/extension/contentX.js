@@ -78,7 +78,7 @@ function triggerCustomAuthentication() {
   return new Promise((resolve) => {
     // Create an iframe to load the authentication UI
     const iframe = document.createElement('iframe');
-    iframe.src = chrome.runtime.getURL('auth.html');
+    iframe.src = chrome.runtime.getURL('authX.html');
     iframe.style.position = 'fixed';
     iframe.style.top = '0';
     iframe.style.left = '0';
