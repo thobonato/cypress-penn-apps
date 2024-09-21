@@ -1,6 +1,6 @@
-# Cypress3
+# CypressMFA
 
-Cypress3 is a cutting-edge triple-factor authentication system that combines liveness detection, facial recognition, and hand gesture recognition to provide unparalleled security for digital identities.
+Cypress MFA is a cutting-edge triple-factor authentication system that combines liveness detection, facial recognition, and hand gesture recognition to provide unparalleled security for digital identities.
 
 ## Features
 
@@ -40,7 +40,7 @@ Facial recognition will verify the user's identity using DeepFace.
 The user will be prompted to perform a specific hand gesture within a given timeframe, recognized by the Hand Gestures Image Detection model.
 
 ## Contributing
-We welcome contributions to Cypress3! Please see our CONTRIBUTING.md for details on how to get started.
+We welcome contributions to CypressMFA! Please see our CONTRIBUTING.md for details on how to get started.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
