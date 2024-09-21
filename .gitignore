@@ -7,3 +7,7 @@
 CV/gestures/gestures_model
 CV/gestures/__pycache__
 CV/face_recog/__pycache__
+CV/face_recog/face_venv
+
+
+**.pkl
