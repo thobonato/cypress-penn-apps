@@ -1,3 +1,6 @@
+
+// auth.js
+
 document.getElementById('start-auth').addEventListener('click', function () {
   // Simulate authentication steps
   simulateAuthentication().then((result) => {
