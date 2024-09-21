@@ -1,5 +1,4 @@
-console.log("hello twitter running")
-
+// content.js
 let isAuthenticating = false;
 
 // Function to handle login buttons

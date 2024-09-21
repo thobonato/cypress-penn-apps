@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Twitter Extension",
+  "version": "1.0",
+  "description": "Intercepts GitHub login forms and triggers a custom authentication flow.",
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "https://x.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*"],
+      "js": ["contentX.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["authX.html", "authX.js"],
+      "matches": ["https://x.com/*"]
+    }
+  ]
+}
