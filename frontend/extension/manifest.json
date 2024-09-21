@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Custom Authentication Extension",
+  "version": "1.0",
+  "description": "Intercepts login forms and triggers a custom authentication flow.",
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "https://twitter.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["auth.html", "auth.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

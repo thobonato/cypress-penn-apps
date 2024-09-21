@@ -1,5 +1,6 @@
+
 // content.js
-console.log("hello GITHUBBBB")
+
 let isAuthenticating = false;
 
 // Function to handle login buttons
