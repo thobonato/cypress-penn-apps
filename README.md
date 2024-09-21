@@ -45,7 +45,7 @@ We welcome contributions to Cypress3! Please see our CONTRIBUTING.md for details
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-##Acknowledgments
+## Acknowledgments
 - dima806 for the Hand Gestures Image Detection model
 - Sefik Ilkin Serengil for the DeepFace library
 - OpenCV community for their excellent computer vision library
