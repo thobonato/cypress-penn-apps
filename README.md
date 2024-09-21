@@ -1,4 +1,4 @@
 initial
 
-Gestures model: [by dima806 on hf](https://huggingface.co/dima806/hand_gestures_image_detection/tree/main)__
-Facial Recognition model: [deepface](https://github.com/serengil/deepface?tab=readme-ov-file)__
+Gestures model: [by dima806 on hf](https://huggingface.co/dima806/hand_gestures_image_detection/tree/main) <br />
+Facial Recognition model: [deepface](https://github.com/serengil/deepface?tab=readme-ov-file)
