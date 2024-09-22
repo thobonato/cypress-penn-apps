@@ -13,3 +13,5 @@ frontend/extension/node_modules/node/bin/node
 
 **.pkl
 backend/CV/face_recog/faces/ds_model_vggface_detector_opencv_aligned_normalization_base_expand_0.pkl
+
+frontend/local-auth-server/node_modules
