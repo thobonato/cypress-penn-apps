@@ -41,6 +41,7 @@ async def stream_data(frame_json: dict):
     try:
         frame_data = frame_json.get('frame_data')
         username = frame_json.get('username')
+
         
 
         print(username)
