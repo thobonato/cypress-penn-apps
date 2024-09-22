@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Local Authentication</title>
+  <style>
+    /* Your existing styles */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    #auth-box {
+      padding: 20px;
+      border-radius: 8px;
+      display: inline-block;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      min-width: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div id="auth-box">
+    <h1>Local Authentication</h1>
+    <p>Please select your authentication status.</p>
+    <button onclick="authenticate(true)">Authenticated</button>
+    <button onclick="authenticate(false)">Not Authenticated</button>
+  </div>
+
+  <script>
+    function authenticate(isAuthenticated) {
+      const result = isAuthenticated ? 'auth-success' : 'auth-failure';
+      console.log('Sending message to opener:', result);
+
+      if (window.opener) {
+        window.opener.postMessage(result, '*');
+      } else {
+        console.error('window.opener is null');
+        alert('Error: Unable to communicate with the opener window.');
+      }
+
+      window.close();
+    }
+  </script>
+</body>
+</html>

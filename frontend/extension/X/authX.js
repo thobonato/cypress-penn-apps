@@ -1,30 +1,32 @@
-
-// auth.js
-
-document.getElementById('start-auth').addEventListener('click', function () {
-  // Simulate authentication steps
-  simulateAuthentication().then((result) => {
-    if (result) {
-      // Send success message to parent window
-      window.parent.postMessage('auth-success', '*');
-    } else {
-      // Send failure message to parent window
-      window.parent.postMessage('auth-failure', '*');
-    }
-  });
+document.getElementById('cancel-auth').addEventListener('click', function () {
+  console.log('Cancel button clicked');
+  window.parent.postMessage('auth-failure', '*');
 });
 
-// Function to simulate authentication steps
-function simulateAuthentication() {
-  return new Promise((resolve) => {
-    // Simulate face detection and action prompts
-    // For the purpose of this demo, we'll use a timeout
+document.getElementById('proceed-auth').addEventListener('click', function () {
+  console.log('Proceed button clicked');
+  const authWindow = window.open(
+    'http://localhost:8080/auth',
+    'LocalAuth',
+    'width=600,height=400'
+  );
 
-    setTimeout(() => {
-      // Simulate a random authentication result
-      const isSuccess = confirm('Simulate successful authentication? Click "OK" for success, "Cancel" for failure.');
+  function messageHandler(event) {
+    console.log('Received message from auth window:', event.data);
+    console.log('Event origin:', event.origin);
 
-      resolve(isSuccess);
-    }, 1000);
-  });
-}
+    if (event.origin !== 'http://localhost:8080') {
+      console.log('Untrusted origin:', event.origin);
+      return; // Ignore messages from unknown origins
+    }
+
+    if (event.data === 'auth-success' || event.data === 'auth-failure') {
+      console.log('Forwarding message to parent:', event.data);
+      window.parent.postMessage(event.data, '*');
+      authWindow.close();
+      window.removeEventListener('message', messageHandler);
+    }
+  }
+
+  window.addEventListener('message', messageHandler);
+});
