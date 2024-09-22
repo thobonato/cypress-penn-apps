@@ -2,11 +2,10 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { IconCamera } from "@tabler/icons-react";
+import Confetti from 'react-confetti';
 
-// Define GestureKey using template literal types
 type GestureKey = `gesture${1 | 2 | 3}_complete`;
 
-// Define GesturePass as a type with keys of GestureKey
 type GesturePass = {
   [key in GestureKey]: boolean;
 };
@@ -39,6 +38,28 @@ const AuthPage = () => {
       time_left: 15,
     },
   });
+  const [authAccepted, setAuthAccepted] = useState(false);
+
+  useEffect(() => {
+    const gesturesCompleted = Object.values(resultData.result.gesture_pass).every(
+      (isComplete) => isComplete
+    );
+
+    if (gesturesCompleted) {
+      if (!authAccepted) {
+        setAuthAccepted(true);
+
+        // Send a message to the opener window (content script)
+        if (window.opener) {
+          window.opener.postMessage('AUTH_SUCCESS', '*');
+        } else {
+          console.error('window.opener is null');
+        }
+
+        // No need to make an API call if backend integration isn't required
+      }
+    }
+  }, [resultData, authAccepted]);
 
   const toggleCamera = async () => {
     if (!isCameraOn) {
@@ -65,7 +86,7 @@ const AuthPage = () => {
     let timerInterval: NodeJS.Timeout;
     let apiInterval: NodeJS.Timeout;
 
-    if (isCameraOn) {
+    if (isCameraOn && !authAccepted) {
       // Start the timer
       timerInterval = setInterval(() => {
         setTimeLeft((prevTime) => {
@@ -89,7 +110,14 @@ const AuthPage = () => {
       clearInterval(timerInterval);
       clearInterval(apiInterval);
     };
-  }, [isCameraOn]);
+  }, [isCameraOn, authAccepted]);
+
+  useEffect(() => {
+    if (timeLeft <= 0 && !authAccepted) {
+      setAuthAccepted(false);
+      // Optionally handle failed authentication here
+    }
+  }, [timeLeft, authAccepted]);
 
   const captureFrameAndCallAPI = async () => {
     if (videoRef.current && canvasRef.current && isCameraOn) {
@@ -127,11 +155,38 @@ const AuthPage = () => {
   // Define the gesture numbers as a constant tuple
   const gestureNums = [1, 2, 3] as const;
 
+  // Monitor gesture completion
+  useEffect(() => {
+    const gesturesCompleted = Object.values(resultData.result.gesture_pass).every(
+      (isComplete) => isComplete
+    );
+
+    if (gesturesCompleted) {
+      if (!authAccepted) {
+        setAuthAccepted(true);
+        // Place your API call here
+        // Example:
+        // await fetch('/api/your-endpoint', { method: 'POST', body: JSON.stringify({ authenticated: true }) });
+      }
+    }
+  }, [resultData, authAccepted]);
+
   return (
-    <div className="max-w-md w-full mx-auto rounded-xl p-4 md:p-8 shadow-lg shadow-black bg-black">
+    <div>
+        {authAccepted && <Confetti width={window.innerWidth} height={window.innerHeight} />}
+    <div className="max-w-md w-full mx-auto rounded-xl p-4 md:p-8 shadow-lg shadow-black bg-black relative">
+      
       <div className="flex flex-col items-center">
         {/* Timer */}
-        <div className="text-2xl font-bold text-white">{timeLeft}</div>
+        {resultData.result.spoofing_pass ? (
+            <div className="text-2xl font-bold text-red-500">Spoofing Detected.</div>
+        ) : (
+            timeLeft > 0 ? (
+                <div className="text-2xl font-bold text-white">{timeLeft}</div>
+            ) : (
+                <div className="text-2xl font-bold text-red-500">Time's up!</div>
+            )
+        )}
 
         {/* Cypress Auth */}
         <div className="text-xl font-bold text-white mt-2">Cypress Auth</div>
@@ -169,7 +224,6 @@ const AuthPage = () => {
           className="mt-4 bg-gradient-to-br relative group from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-inset"
         >
           {isCameraOn ? "Turn Off Camera" : "Turn On Camera"}
-          <BottomGradient />
         </button>
 
         {/* Current Gesture */}
@@ -204,15 +258,7 @@ const AuthPage = () => {
         height="120"
       />
     </div>
-  );
-};
-
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-green-500 to-transparent" />
-    </>
+    </div>
   );
 };
 

@@ -37,16 +37,10 @@ const TestButton: React.FC = () => {
         onClick={test}
       >
         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#178117_0%,#4F86E2_50%,#178117_100%)]" />
-        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-3 text-sm font-medium text-white backdrop-blur-3xl">
           Save User
         </span>
       </button>
-      
-      {responseData && (
-        <pre className="mt-4 p-4 bg-gray-800 text-green-400 rounded-lg overflow-auto max-w-full">
-          {responseData}
-        </pre>
-      )}
     </div>
   );
 };

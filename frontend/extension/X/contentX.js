@@ -33,6 +33,7 @@ function handleNextButton(button) {
 
     sessionStorage.setItem('savedUsername', usernameInput.value);
 
+    // Call the global triggerCustomAuthentication function
     triggerCustomAuthentication().then((isAuthenticated) => {
       console.log('Authentication result:', isAuthenticated);
       if (isAuthenticated) {
@@ -157,61 +158,43 @@ function observeDOM() {
 
 function triggerCustomAuthentication() {
   return new Promise((resolve) => {
-    const iframe = document.createElement('iframe');
-    iframe.src = chrome.runtime.getURL('X/authX.html');
-    iframe.style.position = 'fixed';
-    iframe.style.top = '0';
-    iframe.style.left = '0';
-    iframe.style.width = '100%';
-    iframe.style.height = '100%';
-    iframe.style.border = 'none';
-    iframe.style.zIndex = '9999';
-    iframe.id = 'custom-auth-iframe';
-    document.body.appendChild(iframe);
+    const authWindow = window.open('http://localhost:3000/auth', '_blank', 'width=800,height=600');
 
     resolveAuthentication = function (isAuthenticated) {
-      const iframe = document.getElementById('custom-auth-iframe');
-      if (iframe) {
-        document.body.removeChild(iframe);
+      if (authWindow) {
+        authWindow.close();
       }
       resolve(isAuthenticated);
     };
-  });
-}
-// Ensure the message listener is set up only once
-if (!window.hasSetupAuthMessageListener) {
-  // Listen for messages from the iframe (authX.html)
-  window.addEventListener('message', function handler(event) {
-    console.log('Message received in content script:', event.data);
-    console.log('Event origin:', event.origin);
 
-    // Get the extension's origin
-    const extensionOrigin = 'chrome-extension://' + chrome.runtime.id;
+    // Set up event listener to receive messages from the auth window
+    function eventHandler(event) {
+      console.log('Message received in content script:', event.data);
+      console.log('Event origin:', event.origin);
 
-    // Accept messages from the extension iframe and localhost
-    if (
-      event.origin !== window.location.origin &&
-      event.origin !== 'http://localhost:8080' &&
-      event.origin !== extensionOrigin
-    ) {
-      console.log('Ignoring message from untrusted origin:', event.origin);
-      return;
-    }
-
-    if (event.data === 'auth-success') {
-      console.log('Authentication successful in content script');
-      if (typeof resolveAuthentication === 'function') {
-        resolveAuthentication(true);
+      // Accept messages only from your web app's origin
+      if (event.origin !== 'http://localhost:3000') {
+        console.log('Ignoring message from untrusted origin:', event.origin);
+        return;
       }
-    } else if (event.data === 'auth-failure') {
-      console.log('Authentication failed in content script');
-      if (typeof resolveAuthentication === 'function') {
-        resolveAuthentication(false);
+
+      if (event.data === 'AUTH_SUCCESS') {
+        console.log('Authentication successful in content script');
+        window.removeEventListener('message', eventHandler); // Clean up listener
+        if (typeof resolveAuthentication === 'function') {
+          resolveAuthentication(true);
+        }
+      } else if (event.data === 'AUTH_FAILURE') {
+        console.log('Authentication failed in content script');
+        window.removeEventListener('message', eventHandler); // Clean up listener
+        if (typeof resolveAuthentication === 'function') {
+          resolveAuthentication(false);
+        }
       }
     }
-  });
 
-  window.hasSetupAuthMessageListener = true;
+    window.addEventListener('message', eventHandler, false);
+  });
 }
 
 observeDOM();

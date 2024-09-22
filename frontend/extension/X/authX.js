@@ -6,7 +6,7 @@ document.getElementById('cancel-auth').addEventListener('click', function () {
 document.getElementById('proceed-auth').addEventListener('click', function () {
   console.log('Proceed button clicked');
   const authWindow = window.open(
-    'http://localhost:8080/auth',
+    'http://localhost:3000/auth',
     'LocalAuth',
     'width=600,height=400'
   );
@@ -15,7 +15,7 @@ document.getElementById('proceed-auth').addEventListener('click', function () {
     console.log('Received message from auth window:', event.data);
     console.log('Event origin:', event.origin);
 
-    if (event.origin !== 'http://localhost:8080') {
+    if (event.origin !== 'http://localhost:3000') {
       console.log('Untrusted origin:', event.origin);
       return; // Ignore messages from unknown origins
     }

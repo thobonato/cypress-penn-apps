@@ -28,7 +28,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://x.com/*", "https://www.x.com/*"],
+      "matches": ["https://x.com/*", "https://www.x.com/*","http://localhost/*"],
       "js": ["X/contentX.js"],
       "run_at": "document_idle"
     },

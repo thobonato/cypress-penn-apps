@@ -63,7 +63,7 @@ const VideoStreamingDashboard = ({ onFrameCapture, onUserIdChange }: {
   };
 
   return (
-    <div className="max-w-md w-full mx-auto rounded-xl p-4 md:p-8 shadow-lg shadow-black bg-black">
+    <div className="max-w-md w-full mx-auto rounded-xl p-4 md:pt-8 md:px-8 md:pb-0 shadow-lg shadow-black bg-black">
       <form className="my-1" onSubmit={handleSubmit}>
         <LabelInputContainer className="mb-4">
           <Input
@@ -144,20 +144,14 @@ const TestButton = ({ frameData, userId }: { frameData: string, userId: string }
   return (
     <div>
       <button 
-        className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+        className="my-6 relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
         onClick={test}
       >
         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#178117_0%,#4F86E2_50%,#178117_100%)]" />
-        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-3 text-sm font-medium text-white backdrop-blur-3xl">
           Save User
         </span>
       </button>
-      
-      {responseData && (
-        <pre className="mt-4 p-4 bg-gray-800 text-green-400 rounded-lg overflow-auto max-w-full">
-          {responseData}
-        </pre>
-      )}
     </div>
   );
 };

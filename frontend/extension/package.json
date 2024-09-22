@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "node": "^22.9.0",
+    "package-lock.json": "^1.0.0"
+  }
+}
