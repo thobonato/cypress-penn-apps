@@ -1,13 +1,6 @@
 from pymongo import MongoClient
 print("Hello, MongoDB!")
 
-# Connect to MongoDB
-# client = MongoClient('mongodb://atlas-sql-66ef3e5fed6e0809b6d476ac-oghgb.a.query.mongodb.net/user_profiles?ssl=true&authSource=admin',
-#                      username='akhilmetukuru2016',
-#                      password='test1234',
-#                      authSource='admin',
-#                      authMechanism='SCRAM-SHA-256')
-
 # Construct the MongoDB connection string
 username = 'akhilmetukuru2016'
 password = 'test1234'
@@ -40,7 +33,6 @@ mydict = { "name": "John", "address": "Highway 37" }
 x = col.insert_one(mydict)
 print("Insert result:", x.inserted_id)
 
-)
 
 # # Equivalent of SELECT * FROM table
 # all_documents = collection.find()
