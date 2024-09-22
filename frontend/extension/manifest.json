@@ -1,22 +1,34 @@
 {
   "manifest_version": 3,
   "name": "Custom Authentication Extension",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Intercepts login forms and triggers a custom authentication flow.",
   "permissions": [
     "scripting",
     "activeTab",
+    "http://localhost/*",
+    "https://x.com/*",
+    "https://github.com/*",
+    "https://www.instagram.com/*",
+    "https://incomee.co/*",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost/*",
     "https://x.com/*",
     "https://github.com/*",
     "https://www.instagram.com/*",
     "https://incomee.co/*"
   ],
-  "host_permissions": [
-    "<all_urls>" 
-  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "externally_connectable": {
+    "matches": ["http://localhost/*"]
+  },
   "content_scripts": [
     {
-      "matches": ["https://x.com/*"],
+      "matches": ["https://x.com/*", "https://www.x.com/*"],
       "js": ["X/contentX.js"],
       "run_at": "document_idle"
     },
@@ -38,7 +50,10 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["X/authX.html", "X/authX.js"],
+      "resources": [
+        "X/authX.html",
+        "X/authX.js"
+      ],
       "matches": ["https://x.com/*"]
     },
     {

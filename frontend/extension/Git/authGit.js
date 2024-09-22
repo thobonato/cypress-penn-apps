@@ -1,3 +1,5 @@
+// Git/authGit.js
+
 document.getElementById('start-auth').addEventListener('click', function () {
   // Simulate authentication steps
   simulateAuthentication().then((result) => {
@@ -14,13 +16,10 @@ document.getElementById('start-auth').addEventListener('click', function () {
 // Function to simulate authentication steps
 function simulateAuthentication() {
   return new Promise((resolve) => {
-    // Simulate face detection and action prompts
-    // For the purpose of this demo, we'll use a timeout
-
+    // Simulate authentication delay
     setTimeout(() => {
-      // Simulate a random authentication result
+      // Simulate user confirmation for authentication success
       const isSuccess = confirm('Simulate successful authentication? Click "OK" for success, "Cancel" for failure.');
-
       resolve(isSuccess);
     }, 1000);
   });

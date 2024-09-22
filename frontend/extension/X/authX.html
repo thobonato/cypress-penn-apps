@@ -1,8 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>X Multi-Factor Authentication</title>
+  <title>CypressMFA</title>
   <style>
+    /* Your existing styles */
     body {
       font-family: Arial, sans-serif;
       text-align: center;
@@ -10,17 +11,34 @@
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
     }
+    #auth-box {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      display: inline-block;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 20px;
+    }
     button {
       padding: 10px 20px;
       font-size: 16px;
       margin: 10px;
+      min-width: 120px;
     }
   </style>
 </head>
 <body>
-  <h1>Two-Factor Authentication</h1>
-  <p>Please complete the additional authentication step to proceed.</p>
-  <button id="start-auth">Start Authentication</button>
+  <div id="auth-box">
+    <h1>CypressMFA</h1>
+    <p>Please complete the additional authentication step to proceed.</p>
+    <button id="cancel-auth">Cancel</button>
+    <button id="proceed-auth">Proceed</button>
+  </div>
 
   <script src="authX.js"></script>
 </body>
