@@ -10,7 +10,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+<<<<<<< HEAD
     "express": "^4.21.0",
     "node": "^22.9.0"
+=======
+    "express": "^4.21.0"
+>>>>>>> refs/remotes/origin/main
   }
 }
