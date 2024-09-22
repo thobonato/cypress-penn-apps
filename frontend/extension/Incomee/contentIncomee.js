@@ -1,6 +1,3 @@
-
-// content.js
-
 let isAuthenticating = false;
 
 // Function to handle login buttons
@@ -55,13 +52,13 @@ function observeDOM() {
         addedNodes.forEach((node) => {
           if (node.nodeType === Node.ELEMENT_NODE) {
             // Check for login button
-            const loginButton = node.querySelector('[data-testid="LoginForm_Login_Button"]');
+            const loginButton = node.querySelector('button.bubble-element.Button.clickable-element');
             if (loginButton) {
               handleLoginButton(loginButton);
             }
 
             // Also check if the node itself is the login button
-            if (node.getAttribute && node.getAttribute('data-testid') === 'LoginForm_Login_Button') {
+            if (node.matches && node.matches('button.bubble-element.Button.clickable-element')) {
               handleLoginButton(node);
             }
           }
@@ -78,7 +75,7 @@ function triggerCustomAuthentication() {
   return new Promise((resolve) => {
     // Create an iframe to load the authentication UI
     const iframe = document.createElement('iframe');
-    iframe.src = chrome.runtime.getURL('authX.html');
+    iframe.src = chrome.runtime.getURL('Incomee/authIncomee.html');
     iframe.style.position = 'fixed';
     iframe.style.top = '0';
     iframe.style.left = '0';

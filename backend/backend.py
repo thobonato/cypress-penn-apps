@@ -1,6 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import uvicorn
+import base64
+
 
 
 app = FastAPI()
@@ -12,6 +15,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class FrameData(BaseModel):
+    frame_data: str
+    username: str
 
 @app.get("/")
 async def root():
@@ -30,6 +37,7 @@ async def stream_data(frame_data: str):
             "gestures":True}
 
 @app.post("/api/send-db")
+<<<<<<< HEAD
 async def stream_data(username, frame_data):
     try:
         # Convert frame_data string to numpy array
@@ -50,6 +58,19 @@ async def stream_data(username, frame_data):
         else:
             raise HTTPException(status_code=500, detail="Failed to insert data")
     
+=======
+async def stream_data(frame_json: dict):
+    try:
+        frame_data = frame_json.get('frame_data')
+        username = frame_json.get('username')
+        
+
+        print(username)
+        print(frame_data)
+
+        # Process frame_data and username here
+        return {"success": True}
+>>>>>>> refs/remotes/origin/main
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}"
 
