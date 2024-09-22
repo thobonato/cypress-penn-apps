@@ -8,6 +8,7 @@ backend/CV/gestures/gestures_model
 backend/CV/gestures/__pycache__
 backend/CV/face_recog/__pycache__
 backend/CV/face_recog/face_venv
+frontend/extension/node_modules/
 
 
 **.pkl
