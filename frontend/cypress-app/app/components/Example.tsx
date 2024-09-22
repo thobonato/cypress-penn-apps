@@ -9,7 +9,7 @@ const TestButton: React.FC = () => {
       const frameData = encodeURIComponent(JSON.stringify({ example: "data" }));
       
       const response = await fetch(`http://localhost:8000/api/stream-feed?frame_data=${frameData}`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -31,14 +31,14 @@ const TestButton: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+    <div>
       <button 
         className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
         onClick={test}
       >
-        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#178117_0%,#4F86E2_50%,#178117_100%)]" />
         <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-          Test Button
+          Save User
         </span>
       </button>
       
