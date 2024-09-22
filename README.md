@@ -1,53 +1,58 @@
 # CypressMFA
 
-Cypress MFA is a cutting-edge triple-factor authentication system that combines liveness detection, facial recognition, and hand gesture recognition to provide unparalleled security for digital identities.
+CypressMFA is a cutting-edge, triple-factor authentication system designed to secure user identities through a combination of liveness detection, facial recognition, and hand gesture recognition. Built with the modern-day security challenges in mind, this solution adds an extra layer of protection that is both robust and user-friendly. The system is packaged as a Chrome extension, allowing seamless integration across various websites and applications.
 
-## Features
+## Inspiration
 
-- **Liveness Detection:** Ensures the authenticity of the user's presence.
-- **Facial Recognition:** Verifies user identity against stored images.
-- **Hand Gesture Recognition:** Adds a dynamic, time-sensitive security layer.
-- **User-Friendly Interface:** Simple and intuitive authentication process.
-- **Scalable and Secure:** Built on robust, industry-standard technologies.
+The inspiration for CypressMFA came from the growing need for more secure and adaptive multi-factor authentication (MFA) systems. With the rise of digital security threats, businesses and individuals are more reliant on digital identities than ever before. The need to secure access to these digital services has never been more important. We sought to create a solution that not only enhances security but also remains adaptable to various industry use cases. By embedding the system into a Chrome extension, we ensure it is widely accessible and easily usable across multiple platforms.
 
-## Tech Stack
+## What It Does
 
-- **Backend:** Python 3.8+, FastAPI
-- **Database:** MongoDB Atlas
-- **Computer Vision:** OpenCV
-- **Gestures Model:** Hand Gestures Image Detection by dima806
-- **Facial Recognition:** DeepFace
-- **Frontend:** React
+CypressMFA combines three key elements to verify the identity of users:
+1. **Liveness Detection**: Ensures the person attempting access is live, preventing spoofing through static images or videos.
+2. **Facial Recognition**: Utilizes state-of-the-art facial recognition technology to identify the user.
+3. **Hand Gesture Recognition**: Adds an additional layer of security by requiring a specific hand gesture, making it much more difficult for impostors to gain access.
 
-## Installation
+The system is designed as a **Chrome extension** that can be easily installed and used across a variety of websites. This approach provides users with a secure and convenient authentication experience regardless of the web platform they are using.
 
-```bash
-git clone https://github.com/your-username/cypress-penn-apps.git
-cd cypress-penn-apps
-python -m venv venv
-source venv/bin/activate  # On Windows, use venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env
-# Edit .env with your MongoDB Atlas connection string and other configurations
-Run the Application
-```bash
-uvicorn app.main:app --reload
-Usage
-Register a new user by providing a username and uploading a facial image. During authentication:
-```
-The system will perform a liveness check.
-Facial recognition will verify the user's identity using DeepFace.
-The user will be prompted to perform a specific hand gesture within a given timeframe, recognized by the Hand Gestures Image Detection model.
+## How We Built It
 
-## Contributing
-We welcome contributions to CypressMFA! Please see our CONTRIBUTING.md for details on how to get started.
+CypressMFA was developed using a robust tech stack to ensure efficiency, scalability, and security:
+- **Backend**: Built with Python and FastAPI for high-performance web handling.
+- **Database**: We utilized MongoDB Atlas for scalable, cloud-based database management.
+- **Image Processing**: For real-time image and video processing, we integrated the OpenCV library.
+- **Facial Recognition**: Leveraged the DeepFace library to perform accurate facial recognition.
+- **Hand Gesture Recognition**: Implemented using a pre-trained model from dima806, which was adapted to suit our specific requirements.
+- **Chrome Extension**: The system is integrated into a Chrome extension that interacts with the web browser, enabling authentication across different websites.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+### Tech Stack:
+- **Programming Language**: Python
+- **Web Framework**: FastAPI
+- **Database**: MongoDB Atlas
+- **Libraries**: OpenCV, DeepFace
+- **Gesture Model**: dima806 Hand Gesture Recognition
+- **Chrome Extension**: JavaScript for interaction with web elements
 
-## Acknowledgments
-- dima806 for the Hand Gestures Image Detection model
-- Sefik Ilkin Serengil for the DeepFace library
-- OpenCV community for their excellent computer vision library
-- FastAPI team for the high-performance web framework
-- MongoDB team for their robust and scalable database solution
+## Challenges We Ran Into
+
+Developing CypressMFA came with a number of challenges:
+- **Liveness and Facial Recognition Accuracy**: Ensuring accurate recognition in varying lighting conditions was a key obstacle. We had to fine-tune our models to perform well in real-time.
+- **Hand Gesture Integration**: Making the hand gesture recognition system responsive, dynamic, and secure was more complex than initially anticipated.
+- **Chrome Extension Integration**: Ensuring the extension worked smoothly across various websites and platforms required a well-architected interface between the browser, the backend, and the web pages.
+- **Scalability**: Ensuring the system was scalable without compromising on security or performance required careful design and testing.
+
+## Accomplishments That We're Proud Of
+
+We’re proud of a few significant achievements:
+- **Real-Time Security**: CypressMFA performs security checks in real-time without compromising performance or user experience.
+- **Cross-Platform Compatibility**: By making the system available as a Chrome extension, users can securely authenticate on a variety of websites.
+- **Balance Between Security & Usability**: We achieved a balance between high-level security and maintaining a user-friendly interface.
+- **Scalability**: The architecture is built to scale efficiently, allowing the system to handle a growing number of users while keeping security robust.
+
+## What We Learned
+
+Through the development process of CypressMFA, we gained valuable insights:
+- **Machine Learning Models**: We learned a great deal about optimizing machine learning models for real-time image processing and gesture recognition.
+- **Backend Development**: We enhanced our skills in backend development, particularly in integrating various technologies.
+- **Browser Extension Development**: Building the Chrome extension taught us how to effectively integrate authentication mechanisms into browsers for seamless cross-platform use.
+- **Security Trade-offs**: Finding a balance between stringent security measures and user experience taught us about the trade-offs in building robust authent
