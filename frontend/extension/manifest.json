@@ -8,7 +8,8 @@
     "activeTab",
     "https://x.com/*",
     "https://github.com/*",
-    "https://www.instagram.com/*"
+    "https://www.instagram.com/*",
+    "https://incomee.co/*"
   ],
   "host_permissions": [
     "<all_urls>" 
@@ -28,6 +29,11 @@
       "matches": ["https://www.instagram.com/*"],
       "js": ["Instagram/contentInstagram.js"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://incomee.co/*"],
+      "js": ["Incomee/contentIncomee.js"],
+      "run_at": "document_end"
     }
   ],
   "web_accessible_resources": [
@@ -42,6 +48,10 @@
     {
       "resources": ["Instagram/authInstagram.html", "Instagram/authInstagram.js"],
       "matches": ["https://www.instagram.com/*"]
+    },
+    {
+      "resources": ["Incomee/authIncomee.html", "Incomee/authIncomee.js"],
+      "matches": ["https://incomee.co/*"]
     }
   ]
 }
