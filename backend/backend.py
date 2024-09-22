@@ -37,43 +37,26 @@ async def stream_data(frame_data: str):
             "gestures":True}
 
 @app.post("/api/send-db")
-<<<<<<< HEAD
-async def stream_data(username, frame_data):
+async def stream_data(frame_json: dict):
     try:
-        # Convert frame_data string to numpy array
-        np_array = np.fromstring(frame_data, sep=',')
-        
-        # Create document to insert
+        frame_data = frame_json.get('frame_data')
+        username = frame_json.get('username')
         document = {
             "username": username,
             "frame_data": np_array.tolist()  # Convert np array to list for MongoDB storage
         }
-        
-        # Insert document into MongoDB
-        result = collection.insert_one(document)
+
+        print(username)
+        print(frame_data)
+
+                # Insert document into MongoDB
+        result = collection.insert_one(username, frame_data)
         
         # Check if insertion was successful
         if result.inserted_id:
             return {"success": True}
         else:
             raise HTTPException(status_code=500, detail="Failed to insert data")
-    
-=======
-async def stream_data(frame_json: dict):
-    try:
-        frame_data = frame_json.get('frame_data')
-        username = frame_json.get('username')
-        
-
-        print(username)
-        print(frame_data)
-
-        # Process frame_data and username here
-        return {"success": True}
->>>>>>> refs/remotes/origin/main
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error: {str(e)}"
-
     
     
 
