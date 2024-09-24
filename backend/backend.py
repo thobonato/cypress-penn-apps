@@ -8,9 +8,10 @@ import numpy as np
 from CV.face_recog.inference import DetectFace
 from CV.gestures.inference import DetectGesture
 import cv2
-import mediapipe as mp  # Added import for MediaPipe
-
-prev_result = None  # Initialize global variable
+import mediapipe as mp  # Added import for MediaPipe CHANGE THIS MOVE TO CV
+from db import MongoConn
+from dotenv import load_dotenv
+import os
 
 def get_random_gesture(prev=None):
     gestures = [
@@ -31,8 +32,8 @@ def get_random_gesture(prev=None):
     return random.choice(available_gestures)
 
 ##### REPLACE WITH DB #####
-from deepface import DeepFace
-tom_enc = DeepFace.represent(img_path="./CV/face_recog/faces/max.jpg", enforce_detection=False)[0]["embedding"]
+# from deepface import DeepFace
+# tom_enc = DeepFace.represent(img_path="./CV/face_recog/faces/max.jpg", enforce_detection=False)[0]["embedding"]
 prev_result = {
     "result": {
         "spoofing_pass": False,
@@ -48,9 +49,13 @@ prev_result = {
 }
 ############################
 
+load_dotenv()
 app = FastAPI()
 gesture_model = DetectGesture("./CV/gestures/gestures_model")
 face_model = DetectFace()
+mongo_db = MongoConn(os.environ.get("MONGO_URI"))
+# mongo_db.coll.delete_many({})
+chrome_id_global = None # make it so that this happens automatically in auth page
 
 # Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands
@@ -94,9 +99,10 @@ async def stream_data(frame_json: dict):
 
         # Determine if we need to run inference
         run_inference = not (spoofing is False and faceid is True)
-
+    
         if run_inference:
-            face_res = face_model.run_inference(image, tom_enc)  # Replace with DB as needed
+            uploaded_enc = res = mongo_db.get_pic_encoding(chrome_id_global)
+            face_res = face_model.run_inference(image, uploaded_enc)  # Replace with DB as needed
             
             # Update faceid
             faceid = bool(face_res["faceID_passed"]) or faceid
@@ -206,49 +212,21 @@ async def stream_data(frame_json: dict):
     prev_result = res  # Update the global prev_result
 
     return res
-
-@app.post("/api/send-db")
-async def send_db(frame_json: dict):
-    try:
-        frame_data = frame_json.get('frame_data')
-        username = frame_json.get('username')
-        document = {
-            "username": username,
-            "frame_data": []  # Placeholder for frame data
-        }
-
-        print(f"Username: {username}")
-        print(f"Frame data received.")
-
-        # Insert document into MongoDB or your database
-        # result = collection.insert_one(document)
-
-        # Check if insertion was successful
-        # if result.inserted_id:
-        return {"success": True}
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to insert data")
     
 @app.post("/api/send-db")
 async def send_db(frame_json: dict):
+    global chrome_id_global
     try:
         frame_data = frame_json.get('frame_data')
-        username = frame_json.get('username')
-        document = {
-            "username": username,
-            "frame_data": []  # Placeholder for frame data
-        }
+        chrome_id = frame_json.get('username')
+        pic_encoding = face_model.get_encoding(frame_data)
+        
+        # Insert into MongoDB
+        res = mongo_db.insert_data(chrome_id, pic_encoding)
 
-        print(f"Username: {username}")
-        print(f"Frame data received.")
+        chrome_id_global = chrome_id
 
-        # Insert document into MongoDB or your database
-        # result = collection.insert_one(document)
-
-        # Check if insertion was successful
-        # if result.inserted_id:
-        return {"success": True}
+        return {"success": bool(res)}
     except Exception as e:
         print(f"Error: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to insert data")
