@@ -7,8 +7,8 @@ from concurrent.futures import ThreadPoolExecutor
 from deepface.modules import verification
 
 class DetectFace:
-    def __init__(self,threshold=0.0):
-        self.threshold = threshold if threshold else verification.find_threshold("VGG-Face", "cosine")
+    def __init__(self):
+        self.threshold = verification.find_threshold("VGG-Face", "cosine")
 
     def _process_frame(self, frame):
         # implement this to get image from array and turn into Image object

@@ -32,7 +32,7 @@ def get_random_gesture(prev=None):
 
 ##### REPLACE WITH DB #####
 from deepface import DeepFace
-tom_enc = DeepFace.represent(img_path="./CV/face_recog/faces/josh.jpg", enforce_detection=False)[0]["embedding"]
+tom_enc = DeepFace.represent(img_path="./CV/face_recog/faces/max.jpg", enforce_detection=False)[0]["embedding"]
 prev_result = {
     "result": {
         "spoofing_pass": False,
@@ -43,7 +43,7 @@ prev_result = {
             "gesture3_complete": False
         },
         "next_random_gesture": get_random_gesture(""),
-        "time_left": 30
+        "time_left": 45
     }
 }
 ############################

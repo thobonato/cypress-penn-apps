@@ -35,7 +35,7 @@ const AuthPage = () => {
         gesture3_complete: false,
       },
       next_random_gesture: '',
-      time_left: 15,
+      time_left: 45,
     },
   });
   const [authAccepted, setAuthAccepted] = useState(false);
@@ -177,19 +177,32 @@ const AuthPage = () => {
     <div className="max-w-md w-full mx-auto rounded-xl p-4 md:p-8 shadow-lg shadow-black bg-black relative">
       
       <div className="flex flex-col items-center">
+
+        {/* CypressMFA */}
+        <h2 className="text-2xl relative z-20 md:text-xl lg:text-2xl font-bold text-center text-white font-sans tracking-tight">
+          <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
+            <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-blue-500 via-green-500 to-blue-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
+              <span>CypressMFA</span>
+            </div>
+            <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-green-500 via-blue-500 to-green-500 py-4">
+              <span>CypressMFA</span>
+            </div>
+          </div>
+        </h2>
+        
         {/* Timer */}
         {resultData.result.spoofing_pass ? (
             <div className="text-2xl font-bold text-red-500">Spoofing Detected.</div>
+        ) : 
+        (
+        timeLeft > 0 ? (
+            <span>
+              <div className="text-2xl font-bold text-white text-center">{timeLeft}</div>
+            </span>
         ) : (
-            timeLeft > 0 ? (
-                <div className="text-2xl font-bold text-white">{timeLeft}</div>
-            ) : (
-                <div className="text-2xl font-bold text-red-500">Time's up!</div>
-            )
+            <div className="text-2xl font-bold text-red-500 text-center">Time's up!</div>
+        )
         )}
-
-        {/* Cypress Auth */}
-        <div className="text-xl font-bold text-white mt-2">Cypress Auth</div>
 
         {/* FaceID Circle */}
         <div className="mt-4">
@@ -203,6 +216,14 @@ const AuthPage = () => {
           </div>
         </div>
 
+        {/* FaceID Result */}
+        {!resultData.result.face_recog_pass ? (
+            <div className="pt-2 text-md font-bold text-red-500 text-center"> Face not yet recognized. </div>
+        ) : (
+            <div className="pt-2 text-md font-bold text-green-500 text-center"> Face recognized. </div>
+        )
+        }
+        
         {/* Camera Stream */}
         <div className="mt-4 w-full aspect-video bg-zinc-800 rounded-lg overflow-hidden">
           <video

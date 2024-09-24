@@ -5,13 +5,8 @@
 
 # CV model
 backend/CV/gestures/gestures_model
-backend/CV/gestures/__pycache__
-backend/CV/face_recog/__pycache__
+backend/CV/face_recog/faces
 backend/CV/face_recog/face_venv
-frontend/extension/node_modules/
-frontend/extension/node_modules/node/bin/node
-
 **.pkl
-backend/CV/face_recog/faces/ds_model_vggface_detector_opencv_aligned_normalization_base_expand_0.pkl
-
-frontend/local-auth-server/node_modules
+node_modules
+__pycache__/
