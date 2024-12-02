@@ -1,4 +1,4 @@
-# CypressMFA
+# CypressMFA ([Devpost](https://devpost.com/software/cypress-mfa))
 
 CypressMFA is a cutting-edge, triple-factor authentication system designed to secure user identities through a combination of liveness detection, facial recognition, and hand gesture recognition. Built with the modern-day security challenges in mind, this solution adds an extra layer of protection that is both robust and user-friendly. The system is packaged as a Chrome extension, allowing seamless integration across various websites and applications.
 
